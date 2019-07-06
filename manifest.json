@@ -1,0 +1,34 @@
+{
+  "name": "Slide Affordance",
+  "description": "Sends a POST request to my slide affordance server on a keypress of up or down.",
+  "version": "0.0.0",
+  "developer": {
+    "name": "Adrian P. Dunston",
+    "url": "https://bitcapulet.com"
+  },
+  "icons": {
+    "48": "icons/specs48.png",
+    "128": "icons/specs128.png"
+  },
+  "incognito": "not_allowed",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "permissions": [
+    "*://bitcapulet.com/*",
+    "webRequest",
+    "browserAction",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/specs48.png",
+      "128": "icons/specs128.png"
+    },
+    "default_title": "Activate Slide Affordance!"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
