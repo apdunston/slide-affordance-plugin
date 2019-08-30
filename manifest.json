@@ -1,7 +1,7 @@
 {
   "name": "Slide Affordance",
-  "description": "Sends a POST request to my slide affordance server on a keypress of up or down.",
-  "version": "0.0.0",
+  "description": "Sends a POST request to my slide affordance server on a keypress of up or down. PROTOTYPE - DO NOT INSTALL",
+  "version": "0.0.1",
   "developer": {
     "name": "Adrian P. Dunston",
     "url": "https://bitcapulet.com"
@@ -16,10 +16,13 @@
     "page": "options/options.html"
   },
   "permissions": [
-    "*://bitcapulet.com/*",
+    "https://slide-affordance-server.gigalixirapp.com/*",
+    "http://localhost:4000/*",
+    "http://localhost/*",
+    "https://*.google.com/*",
     "webRequest",
-    "browserAction",
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "browser_action": {
     "default_icon": {
@@ -30,5 +33,10 @@
   },
   "background": {
     "scripts": ["background.js"]
+  },
+  "applications": {
+    "gecko": {
+      "id": "adrian@x-omega.com"
+    }
   }
 }

@@ -1,5 +1,21 @@
-console.log("Hello, background-world!");
 let isActive = false;
+
+
+
+function logTabs(tabs) {
+  for (let tab of tabs) {
+    // tab.url requires the `tabs` permission
+    console.log("url", tab.url, "id", tab.id);
+  }
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+var querying = browser.tabs.query({url: "*://docs.google.com/presentation/*"});
+querying.then(logTabs, onError);
+
 
 function getCurrentWindowTabs() {
   return browser.tabs.query({currentWindow: true});
@@ -16,7 +32,6 @@ function callOnActiveTab(callback) {
 } 
 
 browser.browserAction.onClicked.addListener(function() {
-  console.log("whoa!"); 
   isActive = !isActive;
   updateIcon();
   let script = "";
@@ -26,13 +41,18 @@ browser.browserAction.onClicked.addListener(function() {
   } else {
     script = "stopSender.js";
   }
-  
-  browser.tabs.executeScript({
-    file: script
-  });
-  
+
+  browser.tabs.query({url: "*://docs.google.com/presentation/*"})
+    .then(function(tabs) {
+      for (let tab of tabs) {
+        browser.tabs.executeScript(tab.id,{
+          file: script
+        });
+      }
+    }, onError);
+    
   callOnActiveTab((tab) => {
-    console.log(tab);
+    console.log("Tab:", tab);
   });
 });
 
